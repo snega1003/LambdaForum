@@ -4,9 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using LambdaForum.Services;
 using LambdaForum.Data.Models;
 using LambdaForum.Data;
+using LambdaForum.Service;
+using LambdaForum.Services;
 
 namespace LambdaForum
 {
@@ -31,8 +32,10 @@ namespace LambdaForum
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            services.AddScoped<IForum, ForumService>();
+            
             services.AddMvc();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
