@@ -12,7 +12,7 @@ namespace LambdaForum.Controllers
     {
 
         private readonly IForum _forumService;
-        private readonly IPost _postService;
+        //private readonly IPost _postService;
 
         public ForumController(IForum forumService)
         {
