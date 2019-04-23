@@ -16,7 +16,5 @@ namespace LambdaForum.Models.Post
         public string PostContent { get; set; }
 
         public IEnumerable<PostReplyModel> Replies { get; set; }
-
-
     }
 }

@@ -1,29 +1,36 @@
 ﻿@model LambdaForum.Models.Post.PostIndexModel
 
+
 <h1>@Model.Title</h1>
 
 <div>
-    Author: @Model.AuthorName (@Model.AuthorRating)
-    Created: @Model.Created
+    <h4>Author: @Model.AuthorName (@Model.AuthorRating) </h4> <h6>Created: @Model.Created</h6>
 </div>
 
 <div>
-    @Model.PostContent
+    <br />
+    <h3>@Model.PostContent</h3>
 </div>
 
 @if (Model.Replies.Any())
 {
-    foreach(var reply in Model.Replies)
+    foreach (var reply in Model.Replies)
     {
-    <div>
         <div>
-            Reply Author: @reply.AuthorName
-            Reply Created: @reply.Created
-        </div>
+            <div>
+                Reply Author: @reply.AuthorName
+                Reply Created: @reply.Created
+            </div>
 
-        <div>
-            Reply: @reply.ReplyContent
+            <div>
+                Reply: @reply.ReplyContent
+            </div>
         </div>
-    </div>
     }
+}
+else
+{
+    <br />
+    <hr />
+    <h4>No replies here yet.</h4>
 }
