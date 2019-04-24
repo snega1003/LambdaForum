@@ -23,4 +23,8 @@
     <ProjectReference Include="..\LambdaForum.Service\LambdaForum.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\forum\" />
+  </ItemGroup>
+
 </Project>
