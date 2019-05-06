@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LambdaForum.Data;
 using LambdaForum.Data.Models;
+using LambdaForum.Models.ApplicationUser;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +27,11 @@ namespace LambdaForum.Controllers
 
         public IActionResult Detail()
         {
-            return View();
+            var model = new ProfileModel()
+            {
+
+            };
+            return View(model);
         }
     }
 }
