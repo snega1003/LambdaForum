@@ -35,8 +35,9 @@ namespace LambdaForum
             services.AddScoped<IForum, ForumService>();
             services.AddScoped<IPost, PostService>();
             services.AddScoped<IPostReply, PostReplyService>();
-            services.AddScoped<IUpload, UploadService>();
-            
+            services.AddSingleton<IUpload, UploadService>();
+            services.AddScoped<IApplicationUser, ApplicationUserService>();
+
             services.AddMvc();
             
         }

@@ -71,14 +71,15 @@ namespace LambdaForum.Controllers
 
         private PostReply BuildReply(PostReplyModel reply, ApplicationUser user)
         {
-            //var now = DateTime.Now;
-            var post = _postService.GetById(reply.Id);
+            var now = DateTime.Now;
+            var post = _postService.GetById(reply.PostId);
 
             return new PostReply
             {
+                Id = reply.Id,
                 Post = post,
-                Content = post.Content,
-                Created = DateTime.Now,
+                Content = reply.ReplyContent,
+                Created = now,
                 User = user
             };
         }
