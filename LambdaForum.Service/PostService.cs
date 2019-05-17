@@ -25,6 +25,18 @@ namespace LambdaForum.Service
 
         }
 
+        public async Task AddReply(PostReply reply)
+        {
+            _context.PostReplies.Add(reply);
+            await _context.SaveChangesAsync();
+
+        }
+
+        public Task Archive(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task Delete(int id)
         {
             throw new NotImplementedException();
@@ -41,6 +53,11 @@ namespace LambdaForum.Service
                 .Include(post => post.User)
                 .Include(post => post.Replies).ThenInclude(reply => reply.User)
                 .Include(post => post.Forum);
+        }
+
+        public IEnumerable<ApplicationUser> GetAllUsers(IEnumerable<Post> posts)
+        {
+            throw new NotImplementedException();
         }
 
         public Post GetById(int id)
@@ -68,9 +85,19 @@ namespace LambdaForum.Service
                     || post.Content.Contains(searchQuery));
         }
 
+        public string GetForumImageUrl(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Post> GetLatestPosts(int n)
         {
             return GetAll().OrderByDescending(post => post.Created).Take(n);
+        }
+
+        public IEnumerable<Post> GetPostsBetween(DateTime start, DateTime end)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Post> GetPostsByForum(int id)
@@ -78,6 +105,21 @@ namespace LambdaForum.Service
             return _context.Forums
                 .Where(forum => forum.Id == id).First()
                 .Posts;
+        }
+
+        public IEnumerable<Post> GetPostsByForumId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Post> GetPostsByUserId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetReplyCount(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

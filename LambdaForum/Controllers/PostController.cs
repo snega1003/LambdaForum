@@ -109,7 +109,7 @@ namespace LambdaForum.Controllers
                 AuthorName = reply.User.UserName,
                 AuthorImageUrl = reply.User.ProfileImageUrl,
                 AuthorRating = reply.User.Rating,
-                Created = reply.Created,
+                Date = reply.Created,
                 ReplyContent = reply.Content,
                 IsAuthorAdmin = IsAuthorAdmin(reply.User),
                 PostId = reply.Post.Id

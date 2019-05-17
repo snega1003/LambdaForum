@@ -16,6 +16,41 @@ namespace LambdaForum.Service
             _context = context;
         }
 
+        public async Task Add(ApplicationUser user)
+        {
+            _context.Add(user);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task BumpRating(string userId, Type type)
+        {
+            var user = GetById(userId);
+            var increment = GetIncrement(type);
+            user.Rating += increment;
+            await _context.SaveChangesAsync();
+        }
+
+        private static int GetIncrement(Type type)
+        {
+            var bump = 0;
+            
+            if (type == typeof(Post))
+            {
+                bump = 3;
+            }
+
+            if (type == typeof(PostReply))
+            {
+                bump = 2;
+            }
+            return bump;
+        }
+
+        public Task Deactivate(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<ApplicationUser> GetAll()
         {
             return _context.ApplicationUsers;
@@ -27,9 +62,12 @@ namespace LambdaForum.Service
                 user => user.Id == id);
         }
 
-        public Task IncrementRating(string id, Type type)
+        public async Task IncrementRating(string id, Type type)
         {
-            throw new NotImplementedException();
+            var user = GetById(id);
+            user.Rating += 1;
+            _context.Update(user);
+            await _context.SaveChangesAsync();
         }
 
         public async Task SetProfileImage(string id, Uri uri)

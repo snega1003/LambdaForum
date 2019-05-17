@@ -13,5 +13,8 @@ namespace LambdaForum.Data
 
         Task SetProfileImage(string id, Uri uri);
         Task IncrementRating(string id, Type type);
+        Task Add(ApplicationUser user);
+        Task Deactivate(ApplicationUser user);
+        Task BumpRating(string userId, Type type);
     }
 }
