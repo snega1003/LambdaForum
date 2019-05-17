@@ -34,6 +34,8 @@ namespace LambdaForum
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IForum, ForumService>();
             services.AddScoped<IPost, PostService>();
+            services.AddScoped<IPostReply, PostReplyService>();
+            services.AddScoped<IUpload, UploadService>();
             
             services.AddMvc();
             
