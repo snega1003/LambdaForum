@@ -13,21 +13,31 @@ namespace LambdaForum.Service
         //Forum uses any framework to interact with actual data
 
         private readonly ApplicationDbContext _context;
+        private readonly IPost _postService;
 
         //Constructor
-        public ForumService(ApplicationDbContext context)
+        public ForumService(ApplicationDbContext context, IPost postService)
         {
             _context = context;
+            _postService = postService;
         }
 
-        public Task Create(Forum forum)
+        public Task Add(Forum forum)
         {
             throw new NotImplementedException();
         }
 
-        public Task Delete(int forumId)
+        public async Task Create(Forum forum)
         {
-            throw new NotImplementedException();
+            _context.Add(forum);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(int forumId)
+        {
+            var forum = GetById(forumId);
+            _context.Remove(forum);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Forum> GetAll()
@@ -53,6 +63,39 @@ namespace LambdaForum.Service
                 .FirstOrDefault();
                 
             return forum;
+        }
+
+        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        {
+            return _postService.GetFilteredPosts(searchQuery);
+        }
+
+        public IEnumerable<Post> GetFilteredPosts(int forumId, string searchQuery)
+        {
+            if (forumId == 0) return _postService.GetFilteredPosts(searchQuery);
+
+            var forum = GetById(forumId);
+
+            return string.IsNullOrEmpty(searchQuery)
+                ? forum.Posts
+                : forum.Posts.Where(post 
+                    => post.Title.Contains(searchQuery) 
+                    || post.Content.Contains(searchQuery));
+        }
+
+        public Post GetLatestPost(int forumId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasRecentPost(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetForumImage(int id, Uri uri)
+        {
+            throw new NotImplementedException();
         }
 
         public Task UpdateForumDescription(int forumId, string newDescription)

@@ -18,5 +18,11 @@ namespace LambdaForum.Data
         Task Delete(int forumId);
         Task UpdateForumTitle(int forumId, string newTitle);
         Task UpdateForumDescription(int forumId, string newDescription);
+        Post GetLatestPost(int forumId);
+        bool HasRecentPost(int id);
+        Task Add(Forum forum);
+        Task SetForumImage(int id, Uri uri);
+        IEnumerable<Post> GetFilteredPosts(string searchQuery);
+        IEnumerable<Post> GetFilteredPosts(int forumId, string modelSearchQuery);
     }
 }
