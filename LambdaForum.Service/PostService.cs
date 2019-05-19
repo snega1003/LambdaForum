@@ -109,17 +109,17 @@ namespace LambdaForum.Service
 
         public IEnumerable<Post> GetPostsByForumId(int id)
         {
-            throw new NotImplementedException();
+            return _context.Forums.First(f => f.Id == id).Posts;
         }
 
         public IEnumerable<Post> GetPostsByUserId(int id)
         {
-            throw new NotImplementedException();
+            return _context.Posts.Where(post => post.User.Id == id.ToString());
         }
 
         public int GetReplyCount(int id)
         {
-            throw new NotImplementedException();
+            return GetById(id).Replies.Count();
         }
     }
 }
